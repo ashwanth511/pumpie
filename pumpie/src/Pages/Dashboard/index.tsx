@@ -7,6 +7,7 @@ import { Settings } from './Settings';
 import { LaunchToken } from './LaunchToken';
 import { TokenList } from './TokenList';
 import { TokenView } from '../TokenView/TokenView';
+import {JettonDeployForm} from "./LaunchPadTest";
 import './Dashboard.css';
 import LiveStreamPage from '../LiveStream/LiveStreamPage';
 import { Toaster } from 'react-hot-toast';
@@ -55,7 +56,7 @@ const MiniPlayerContainer = styled.div<{ isVisible: boolean }>`
   opacity: ${props => props.isVisible ? '1' : '0'};
 `;
 
-type TabType = 'overview' | 'transactions' | 'settings' | 'launch' | 'tokens' | 'live';
+type TabType = 'overview' | 'transactions' | 'settings' | 'launch' | 'tokens' | 'live' | 'lauchTest';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -150,6 +151,8 @@ export const Dashboard: React.FC = () => {
         return <Settings />;
       case 'launch':
         return <LaunchToken />;
+      case 'lauchTest':
+         return <JettonDeployForm/>
       case 'tokens':
         return <TokenList onTokenSelect={setSelectedTokenId} />;
       default:
@@ -187,6 +190,12 @@ export const Dashboard: React.FC = () => {
               onClick={() => handleTabChange('launch')}
             >
               Launch Token
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'lauchTest' ? 'active' : ''}`}
+              onClick={() => handleTabChange('lauchTest')}
+            >
+              lauchTest Token
             </button>
             <button
               className={`tab-button ${activeTab === 'tokens' ? 'active' : ''}`}
